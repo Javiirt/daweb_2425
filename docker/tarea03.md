@@ -8,3 +8,6 @@ En esta tarea vas a arrancar un contenedor al que llamaremos ubuntu, de la image
 
 ## Requisitos
 - Grabacion en asciinema
+
+### Solución
+![Solución de la tarea 3](./Capturas/docker-3-1.png)

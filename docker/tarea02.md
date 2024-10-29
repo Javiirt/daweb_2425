@@ -14,3 +14,7 @@ Descargar las siguientes imágenes y, una vez descargadas, mostrarlas con la ord
 
 ## Requisitos
 - Grabacion en asciinema
+
+
+### Solución
+![Solución de la tarea 2](./Capturas/docker-2-1.png)

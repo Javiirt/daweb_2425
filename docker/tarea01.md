@@ -8,3 +8,13 @@
 ## Requisitos
 - Grabacion en asciinema
 - Detalles de la cuenta en DockerHub
+
+### Solución
+
+![Solución de la tarea 1, paso 1](./Capturas/docker-1-1.png)
+
+![Solución de la tarea 1, paso 2](./Capturas/docker-1-2.png)
+
+![Solución de la tarea 1, paso 3](./Capturas/docker-1-3.png)
+
+![Solución de la tarea 1, paso 4](./Capturas/docker-1-4.png)
