@@ -17,3 +17,10 @@ En esta tarea vas a ejecutar varios servicios web y de bases de datos sobre cont
 
 ## Requisitos
 - Grabacion en asciinema
+
+### Solución
+![Solución de la tarea 4, paso 1](./Capturas/docker-4-1.png)
+![Solución de la tarea 4, paso 2](./Capturas/docker-4-2.png)
+![Solución de la tarea 4, paso 3](./Capturas/docker-4-3.png)
+![Solución de la tarea 4, paso 4](./Capturas/docker-4-4.png)
+![Solución de la tarea 4, paso 5](./Capturas/docker-4-5.png)

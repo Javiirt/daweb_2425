@@ -9,3 +9,6 @@ Partiendo de los contenedores en ejecución de la tarea anterior y ejecutando la
 
 ## Requisitos
 - Grabacion en asciinema
+
+### Solución
+![Solución de la tarea 5](./Capturas/docker-5-1.png)
