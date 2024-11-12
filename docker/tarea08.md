@@ -9,3 +9,8 @@ Seguimos con el tema de la persistencia de datos:
 
 ## Requisitos
 - Grabacion en asciinema
+
+### Solución
+![Solución de la tarea 8, paso 1](./Capturas/docker-8-1.png)
+![Solución de la tarea 8, paso 2](./Capturas/docker-8-2.png)
+![Solución de la tarea 8, paso 3](./Capturas/docker-8-3.png)

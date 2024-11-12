@@ -23,3 +23,15 @@
 
 2. Una vez creado dicho Dockerfile construir la imagen, que se deberá llamar TuNombreUsarioDockerHub/a62.
 
+### Solución Parte 1 
+![Solución de la tarea 10, paso 1](./Capturas/docker-10-1.png)
+![Solución de la tarea 10, paso 2](./Capturas/docker-10-2.png)
+![Solución de la tarea 10, paso 3](./Capturas/docker-10-3.png)
+![Solución de la tarea 10, paso 4](./Capturas/docker-10-4.png)
+![Solución de la tarea 10, paso 5](./Capturas/docker-10-5.png)
+![Solución de la tarea 10, paso 6](./Capturas/docker-10-6.png)
+![Solución de la tarea 10, paso 7](./Capturas/docker-10-7.png)
+
+### Solución Parte 2 
+![Solución de la tarea 10, paso 8](./Capturas/docker-10-8.png)
+![Solución de la tarea 10, paso 9](./Capturas/docker-10-9.png)

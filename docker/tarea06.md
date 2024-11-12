@@ -10,3 +10,13 @@
 ## Requisitos
 - Razonamiento
 - Grabacion en asciinema
+
+
+### Solución
+![Solución de la tarea 6, paso 1](./Capturas/docker-6-1.png)
+
+#### ¿Has podido borrar la imagen? Responde razonadamente.
+El error al intentar eliminar la imagen porque tengo un contenedor (modulo3) basado en esa imagen. Docker no permite eliminar una imagen si hay contenedores en ejecución o detenidos que la están usando.
+
+![Solución de la tarea 6, paso 2](./Capturas/docker-6-2.png)
+

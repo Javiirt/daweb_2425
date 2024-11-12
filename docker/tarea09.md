@@ -24,3 +24,7 @@ Ahora, deberemos realizar los siguiente pasos:
 
 ## Requisitos
 - Grabacion en asciinema
+
+### Solución
+![Solución de la tarea 9, paso 1](./Capturas/docker-9-1.png)
+![Solución de la tarea 9, paso 2](./Capturas/docker-9-2.png)
