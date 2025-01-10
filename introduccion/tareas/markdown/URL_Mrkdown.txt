@@ -1,0 +1,14 @@
+https://github.com/Javiirt/daweb_2425/blob/master/tema-01/apuntes.md
+
+
+Comandos:
+cd C:\Users\2DAW2425-09\Desktop\DAW Javier Rodríguez\Despliegue de aplicaciones web
+git init
+git branch -M main
+git config --global user.email "javivirodri3702@gmail.com"
+git config --global user.name "Javiirt"
+git remote add origin https://github.com/Javiirt/daweb_2425.git
+git pull origin main
+git add .
+git commit -m "Ejercicio MarkDown"
+git push -u origin main
