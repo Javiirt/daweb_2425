@@ -19,14 +19,18 @@
    Explain why giving 777 permissions to a file is a bad idea.
 
 ### **Comandos Usados**
-```bash
-cd ~
-vi test.sh
-# Escribir el contenido del script en vi
-echo -e "#!/bin/bash\nclear\necho \"Hello World\"" > test.sh
-chmod +x test.sh
-./test.sh
-```
+![Ejercicio 1, paso 1](./capturas/lab03-1-1.png)
+
+![Ejercicio 1, paso 2](./capturas/lab03-1-2.png)
+
+![Ejercicio 1, paso 3](./capturas/lab03-1-3.png)
+
+El comando "chmod 777 test.sh" da permisos de lectura, escritura y ejecución a todos los usuarios (propietario, grupo y otros). Esto es problemático porque:
+- Cualquier usuario del sistema puede modificar y ejecutar el archivo, lo que puede resultar en alteraciones o uso malicioso.
+- Los usuarios podrían modificar el archivo sin intención, causando fallos en el script.
+- Es innecesario y no sigue el principio de mínimos privilegios.
+
+En su lugar, es mejor usar chmod +x para darle permisos de ejecución solo al propietario, o permisos más específicos según sea necesario (como chmod 754).
 
 ---
 
@@ -38,17 +42,8 @@ Create two new user accounts:
 - Username: `smith`, Password: `smith`
 
 ### **Comandos Usados**
-```bash
-useradd -d /home/bob bob
-mkdir /home/bob
-chown bob:bob /home/bob
-passwd bob 
+![Ejercicio 2, paso 1](./capturas/lab03-2-1.png)
 
-useradd -d /home/smith smith
-mkdir /home/smith
-chown smith:smith /home/smith
-passwd smith 
-```
 
 ---
 
@@ -61,16 +56,7 @@ passwd smith
 4. Note down the owner/group ownerships and the file permissions of this script.
 
 ### **Comandos Usados**
-```bash
-mkdir /home/ncs
-chmod 777 /home/ncs
-
-cd /home/ncs
-echo -e "#!/bin/bash\necho \"Hello World\"" > hello.sh
-chmod +x hello.sh
-./hello.sh
-ls -l hello.sh
-```
+![Ejercicio 3, paso 1](./capturas/lab03-3-1.png)
 
 ---
 
@@ -88,24 +74,22 @@ ls -l hello.sh
 2. Execute `./hello.sh` and `./bob.sh`. Explain the results you get.
 
 ### **Comandos Usados**
-```bash
-# Parte a: Bob
-su - bob
-cd /home/ncs
-ls
-./hello.sh
 
-echo -e "#!/bin/bash\necho \"Hello this is Bob\"" > bob.sh
-chmod +x bob.sh
-./bob.sh
+#### Parte a: Bob
+![Ejercicio 4, paso 1](./capturas/lab03-4-1.png)
+1. Se ven los archivos presentes en el directorio, por ejemplo, hello.sh y cualquier otro archivo creado anteriormente.
 
-# Parte b: Smith
-su - smith
-cd /home/ncs
-ls
-./hello.sh
-./bob.sh
-```
+2. Sí, debería ejecutarse correctamente si el archivo tiene permisos de ejecución (chmod +x hello.sh) y permisos adecuados de lectura/escritura para bob.
+3. El archivo bob.sh debe crearse y hacerse ejecutable con chmod +x. Esto se puede verificar ejecutando ls -l bob.sh.
+4. Si bob.sh tiene permisos de ejecución, se imprimirá el mensaje "Hello this is Bob". Si no, aparecerá un error de permisos.
+
+#### Parte b: Smith
+![Ejercicio 4, paso 2](./capturas/lab03-4-2.png)
+1. Se ven los mismos archivos que en la cuenta de bob, como hello.sh y bob.sh, ya que el directorio es público.
+2. Ejecución:
+   `./hello.sh`: Debería ejecutarse correctamente si tiene permisos públicos de lectura y ejecución.
+    `./bob.sh`: Si `bob.sh` no tiene permisos de lectura/ejecución para otros usuarios, aparecerá un error de permisos. Para que `smith` pueda ejecutarlo, `bob.sh` debe tener permisos adecuados, como `chmod 755 bob.sh`.
+
 
 ---
 
@@ -116,26 +100,15 @@ ls
 2. Disable `smith`'s user account without deleting it or its files.
 
 ### **Comandos Usados**
-```bash
 
-groupadd sysadmins
-usermod -aG sysadmins bob
-usermod -aG sysadmins smith
-chown :sysadmins /home/ncs
-chown :sysadmins /home/ncs/hello.sh
-chown :sysadmins /home/ncs/bob.sh
-chmod 770 /home/ncs /home/ncs/hello.sh /home/ncs/bob.sh
+#### Creación del grupo y añadir miembros
 
-# Verificar acceso como bob y smith
-su - bob
-cd /home/ncs
-./hello.sh
-./bob.sh
+![Ejercicio 5, paso 1](./capturas/lab03-5-1.png)
 
-su - smith
-cd /home/ncs
-./hello.sh
-./bob.sh
+#### Verificar acceso como bob y smith
 
-# Deshabilitar smith
-usermod -L smith
+![Ejercicio 5, paso 2](./capturas/lab03-5-2.png)
+
+#### Deshabilitar smith
+
+![Ejercicio 5, paso 3](./capturas/lab03-5-3.png)
