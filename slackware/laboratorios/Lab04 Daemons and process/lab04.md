@@ -4,27 +4,25 @@
 1. Find out the total number of processes currently running.
 2. Identify the 10 most CPU-intensive processes and give a brief description of what each of them does.
 
-#### **Respuestas:**
-1. To find the total number of running processes, execute:
-   ```bash
-   ps aux | wc -l
-   ```
-   This command counts all lines returned by `ps aux`, each representing a running process.
+#### **Respuesta:**
+1. Find out the total number of processes currently running.
 
-2. To find the 10 most CPU-intensive processes, execute:
-   ```bash
-   ps aux --sort=-%cpu | head -n 11
-   ```
-   Example output:
-   ```
-   USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-   root       123  75.3  1.2 125000 5000 ?        R    12:00   0:15 some_daemon
-   ```
-   Descriptions of top processes:
-   - **Process 1:** System process handling disk I/O.
-   - **Process 2:** SSH daemon managing remote connections.
-   - **Process 3:** Database engine performing a query.
-   (Provide descriptions based on the `COMMAND` column and `man` pages.)
+   ![Ejercicio 1, paso 1](./capturas/lab04-1-1.png)
+
+2. Identify the 10 most CPU-intensive processes and give a brief description of what each of them does.
+
+   ![Ejercicio 1, paso 2](./capturas/lab04-1-2.png)
+
+- ps aux --sort=-%cpu : Muestra una lista de los procesos en ejecución, ordenados por el uso de CPU. 
+- [kworker/1:1-events] : Proceso del kernel que maneja eventos de hardware en la CPU 1.
+- /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock : Demonio de Docker, gestiona contenedores y sus operaciones.
+- [kworker/1:4-events] : Proceso del kernel que maneja eventos de hardware en la CPU 1.
+- [kworker/u4:2-ext4-rsv-conversion] : Proceso del kernel que maneja la conversión de reservas en sistemas de archivos ext4.
+- /usr/bin/containerd : Servicio que ejecuta y gestiona contenedores en Docker.
+- /sbin/init : Primer proceso iniciado en el sistema, responsable de iniciar otros procesos.
+- [migration/1] : Proceso que maneja la migración de tareas entre CPUs.
+- [kworker/0:1H-kblockd] : Proceso del kernel que maneja bloqueos y eventos relacionados en la CPU 0.
+- /usr/sbin/named -f -u bind : Servicio de DNS, parte del servidor BIND (Berkeley Internet Name Domain).
 
 ---
 
@@ -33,19 +31,14 @@
 #### **Enunciado:**
 1. Execute `nmap localhost`. Write down all processes returned and explain their purpose.
 
-#### **Respuestas:**
-1. To execute the scan, run:
-   ```bash
-   nmap localhost
-   ```
-   Example output:
-   ```
-   PORT   STATE SERVICE
-   22/tcp open  ssh
-   80/tcp open  http
-   ```
-   - **22/tcp (ssh):** Handles secure shell connections.
-   - **80/tcp (http):** Manages web server traffic.
+#### **Respuesta:**
+![Ejercicio 2, paso 1](./capturas/lab04-2-1.png)
+
+- 22/tcp (ssh): Para acceso remoto seguro a tu máquina.
+
+- 80/tcp (http): Para servicios web y páginas web.
+
+- 8181/tcp (intermapper): Para monitoreo de red.
 
 ---
 
@@ -54,19 +47,30 @@
 #### **Enunciado:**
 1. Execute `kill -l` and summarize the signals (numbers 1–9 and 5 more between 10–31).
 
-#### **Respuestas:**
-1. Execute the command:
-   ```bash
-   kill -l
-   ```
-   Signal summary:
-   | **Number** | **Name**   | **Description**                  |
-   |------------|------------|----------------------------------|
-   | 1          | SIGHUP     | Hangup                           |
-   | 2          | SIGINT     | Interrupt from keyboard          |
-   | 3          | SIGQUIT    | Quit from keyboard               |
-   | 9          | SIGKILL    | Kill signal                      |
-   | 15         | SIGTERM    | Termination signal               |
+#### **Respuesta:**
+
+![Ejercicio 3, paso 1](./capturas/lab04-1-2.png)
+
+
+
+| Número | Señal  | Descripción                                                     |
+|--------|--------|-----------------------------------------------------------------|
+| 1      | SIGHUP | Hang up (desconexión)                                           |
+| 2      | SIGINT | Interrupt (interrupción desde el teclado, Ctrl+C)               |
+| 3      | SIGQUIT| Quit (salida)                                                   |
+| 4      | SIGILL | Illegal Instruction (instrucción ilegal)                        |
+| 5      | SIGTRAP| Trace/Breakpoint Trap (trampa de rastreo/punto de interrupción) |
+| 6      | SIGABRT| Abort (aborto)                                                  |
+| 7      | SIGBUS | Bus Error (error de bus)                                        |
+| 8      | SIGFPE | Floating Point Exception (excepción de punto flotante)          |
+| 9      | SIGKILL| Kill (matar el proceso, no se puede capturar ni ignorar)        |
+| 10     | SIGUSR1| User-defined signal 1 (señal definida por el usuario 1)         |
+| 11     | SIGSEGV| Segmentation Fault (fallo de segmentación)                      |
+| 12     | SIGUSR2| User-defined signal 2 (señal definida por el usuario 2)         |
+| 13     | SIGPIPE| Broken Pipe (tubería rota)                                      |
+| 14     | SIGALRM| Alarm Clock (alarma)                                            |
+| 15     | SIGTERM| Termination (terminación)                                       |
+
 
 ---
 
@@ -77,31 +81,17 @@
 2. Disable FTP in `/etc/inetd.conf`, restart `inetd`, and test.
 3. What are SFTP and SSH? Why is Telnet discouraged in real-world usage?
 
-#### **Respuestas:**
-1. **Enable FTP and Telnet:**
-   - Edit `/etc/inetd.conf`:
-     ```bash
-     sudo nano /etc/inetd.conf
-     ```
-     Uncomment lines for FTP and Telnet services.
-   - Restart `inetd`:
-     ```bash
-     sudo kill -HUP $(pidof inetd)
-     ```
-   - Test FTP and Telnet:
-     ```bash
-     ftp localhost
-     telnet localhost
-     ```
+#### **Respuesta:**
 
-2. **Disable FTP:**
-   - Comment out the FTP line in `/etc/inetd.conf`.
-   - Restart `inetd` and test again as above.
+![Ejercicio 4, paso 1](./capturas/lab04-4-1.png)
 
-3. **SFTP and SSH:**
-   - **SFTP:** Secure FTP using SSH for encrypted transfers.
-   - **SSH:** Secure Shell for encrypted remote connections.
-   - **Telnet:** Insecure protocol; data (including passwords) is transmitted in plain text.
+![Ejercicio 4, paso 2](./capturas/lab04-4-2.png)
+
+- SFTP (Secure File Transfer Protocol): Protocolo seguro de transferencia de archivos usando una conexión SSH. Encripta comandos y datos, ofreciendo mayor seguridad que FTP.
+
+- SSH (Secure Shell): Protocolo que permite acceso remoto seguro a dispositivos y servidores. Encripta el tráfico para prevenir interceptaciones.
+
+- Telnet: Permite conexiones remotas pero no encripta datos, lo que lo hace inseguro. Se prefiere SSH en entornos seguros.
 
 ---
 
@@ -110,20 +100,11 @@
 #### **Enunciado:**
 1. Combine `pidof` with `kill -HUP` to restart `inetd` in one command.
 2. Can you FTP as root? Is it advisable? Why (or why not)?
-3. From a Windows machine, FTP and Telnet to the Slackware VM.
 
 #### **Respuestas:**
 1. Restart `inetd` in one command:
-   ```bash
-   kill -HUP $(pidof inetd)
-   ```
+![Ejercicio 5, paso 1](./capturas/lab04-5-1.png)
 
-2. **FTP as root:**
-   - Possible but not advisable due to high security risks. FTP transmits data unencrypted, exposing the root credentials.
+2. Es posible pero no recomendable debido a los altos riesgos de seguridad. El FTP transmite datos sin cifrar, lo que expone las credenciales raíz.
 
-3. **Windows FTP/Telnet:**
-   - Use a Windows FTP/Telnet client to connect to the VM. Example:
-     ```bash
-     ftp <VM_IP_ADDRESS>
-     telnet <VM_IP_ADDRESS>
      
