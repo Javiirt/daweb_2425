@@ -4,15 +4,13 @@
 1. **Crea un archivo llamado `message.txt` con texto, luego redirígelo al comando `mail` para enviarlo a bob.**
 
 ### **Respuesta:**
-```bash
-echo "Este es un mensaje de prueba." > message.txt
-mail -s "Prueba de correo" boblocalhost < message.txt
-```
+
+![Ejercicio 1, paso 1](./capturas/lab06-1-1.png)
 
 2. **Explica qué hace el siguiente comando:**
-```bash
+
 echo "Welcome to Network Computer Systems" | mail -s "Hello world" bobanglia.bryant -c smithanglia.bryant -b rootanglia.bryant
-```
+
 
 ### **Respuesta:**
 Este comando envía un correo con el asunto "Hello world" y el cuerpo del mensaje "Welcome to Network Computer Systems". 
@@ -26,17 +24,8 @@ Este comando envía un correo con el asunto "Hello world" y el cuerpo del mensaj
 **Inicia sesión como bob y verifica que todos los correos enviados a bob están presentes.**
 
 ### **Respuesta:**
-```bash
-su bob
-mail
-exit
-```
-Si no hay correos presentes, verifica que el servicio `sendmail` esté activo. Puedes reiniciarlo usando:
-```bash
-/etc/rc.d/rc.sendmail restart
-```
-Los correos no enviados se almacenan en `/var/spool/mqueue/` y serán enviados una vez que `sendmail` esté activo.
 
+![Ejercicio 2, paso 1](./capturas/lab06-2-1.png)
 ---
 
 ## **Ejercicio 6.3: Explorando `mail`**
@@ -63,34 +52,20 @@ Los correos no enviados se almacenan en `/var/spool/mqueue/` y serán enviados u
    Este directorio contiene los correos de los usuarios almacenados en archivos con sus nombres. La seguridad es crucial, ya que estos archivos pueden ser leídos si las configuraciones de permisos no son adecuadas.
 
 3. **Enviar un correo usando Telnet en SMTP:**
-```bash
-telnet <IP_de_tu_VM> 25
-HELO localhost
-MAIL FROM: tu_nombrelocalhost
-RCPT TO: boblocalhost
-DATA
-Subject: Prueba Telnet
-Este es un mensaje enviado desde Telnet.
-.
-QUIT
-```
+
+![Ejercicio 3, apartado 3](./capturas/lab06-3-1.png)
 
 4. **Habilitar POP3:**
 Edita el archivo `/etc/inetd.conf` y descomenta la línea relacionada con POP3. Luego, reinicia `inetd`:
-```bash
-/etc/rc.d/rc.inetd restart
-```
+
+![Ejercicio 3, apartado 4.1](./capturas/lab06-3-2.png)
+
+![Ejercicio 3, apartado 4.2](./capturas/lab06-3-3.png)
 
 5. **Explorar POP3:**
 Conéctate al puerto 110 mediante Telnet:
-```bash
-telnet <IP_de_tu_VM> 110
-USER bob
-PASS <contraseña_de_bob>
-LIST
-RETR 1
-QUIT
-```
+
+![Ejercicio 3, apartado 4](./capturas/lab06-3-4.png)
 
 6. **Puertos usados por SMTP y POP3:**
 - SMTP: Puerto 25.
