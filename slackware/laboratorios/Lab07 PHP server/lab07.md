@@ -1,127 +1,138 @@
-# Apache HTTP Server and PHP Lab
+# Email under Linux: Actividades y Respuestas
 
-## Exercise 7.1 Configuring Apache
 
-1. **What are the purpose of lines starting with # in `/etc/httpd/httpd.conf`?**  
-   These are comments, used to document the configuration file. They provide instructions or information and are ignored by the system.
+## **Ejercicio 7.1: Configuración de Apache**
 
-2. **Default values of `ServerName` and `DocumentRoot`:**  
-   - **ServerName**: `localhost` (or similar, based on configuration). It specifies the hostname used for the server.  
-   - **DocumentRoot**: `/srv/httpd/htdocs` (or similar). This is the directory where the web server looks for files to serve.  
+![Ejercicio 1, apartado 1](./capturas/lab07-1-1.png)
 
-3. **Uncommenting `Include /etc/httpd/mod_php.conf`:**  
-   This enables PHP support for the Apache server by including the configuration file for the PHP module.
+1. **Las líneas que comienzan con # son comentarios. ¿Cuál es su propósito?**
 
----
+   #### **Respuesta:**
+   Las líneas que comienzan con `#` son comentarios y se utilizan para proporcionar información o descripciones sobre la configuración dentro del archivo `httpd.conf`. No afectan la ejecución de Apache.
 
-## Exercise 7.2 Running Apache
+2. **Encuentra los valores predeterminados de `ServerName` y `DocumentRoot` y anótalos. ¿Qué hacen/significan?**
 
-1. **Why do you need to restart `httpd` if you make changes to the configuration?**  
-   Restarting ensures that changes in the configuration file are applied to the running server process.
+   #### **Respuesta:**
+   - `ServerName`: Especifica el nombre del servidor, que puede ser un dominio o una dirección IP.
+   - `DocumentRoot`: Define la ruta del directorio donde se almacenan los archivos web que Apache servirá.
 
-2. **About `ps aux | grep httpd`:**  
-   a) **What the commands do:**  
-      - `ps aux`: Lists all running processes.  
-      - `grep httpd`: Filters the output to show only lines containing "httpd".  
-      - `|`: Pipes the output of one command to another.  
-      Together, the command displays all running `httpd` processes.  
-  
-   b) **Expected output:**  
-      - If running: Information about the `httpd` processes.  
-      - If not running: No results or only the `grep` process itself.
+3. **Descomenta la línea `Include /etc/httpd/mod_php.conf`. ¿Qué hace esto?**
 
-3. **Finding the parent `httpd` process ID:**  
-   By running `ps axl | egrep "httpd|PPID"`, locate the **PPID** column for the parent `httpd` process.
+   #### **Respuesta:**
+   Permite la carga del módulo de PHP, habilitando la ejecución de archivos PHP en el servidor Apache.
 
 ---
 
-## Exercise 7.3 Creating HTML Files
+## **Ejercicio 7.2: Ejecución de Apache**
 
-1. **What is special about `index.htm` and `index.html` files?**  
-   They are default files served by the web server when no specific file is requested.
+1. **¿Por qué es necesario reiniciar `httpd` después de realizar cambios en la configuración?**
 
-2. **Permissions and ownership of `index.html`:**  
-   - Permissions: Typically `rw-r--r--`.  
-   - Owner/Group: Owned by the user and group under which Apache runs.
+   #### **Respuesta:**
+   Para aplicar los cambios realizados en el archivo de configuración `httpd.conf`, ya que Apache solo carga la configuración al inicio.
 
-3. **Creating `test.html`:**  
-   - **Source code:**  
-     ```html
-     <html>
-     <head><title>NSE Apache Lab</title></head>
-     <body>
-     <h1>This is the NSE Apache Lab test page</h1>
-     <p>Under construction!</p>
-     </body>
-     </html>
-     ```  
-   - **Expected view:** A page with the title "NSE Apache Lab," a header "This is the NSE Apache Lab test page," and a paragraph saying "Under construction!"
+2. **Explicación del comando `ps aux | grep httpd`**
 
----
+![Ejercicio 2, apartado 2](./capturas/lab07-2-1.png)
 
-## Exercise 7.4 Viewing HTML Files Using a Terminal Interface
+   #### **Respuesta:**
+   - `ps aux`: Muestra todos los procesos en ejecución.
+   - `grep httpd`: Filtra la salida para mostrar solo los procesos relacionados con `httpd`.
+   - `|`: Se usa para redirigir la salida de un comando a otro.
+   
+   Si `httpd` está en ejecución, el comando mostrará las instancias del proceso. Si no está en ejecución, no habrá salida relevante.
 
-1. **Difference between CLI and GUI:**  
-   - CLI: Command-Line Interface, text-based and operated via commands.  
-   - GUI: Graphical User Interface, operated through visual elements like icons and buttons.
+3. **Encuentra el ID de proceso del proceso padre de `httpd` usando `ps axl | egrep "httpd|PPID"`.**
 
-2. **What is special about the IP address `127.0.0.1`?**  
-   It is the loopback address, representing the local machine.
+![Ejercicio 2, apartado 3](./capturas/lab07-2-2.png)
 
-3. **Viewing `test.html` using `lynx`:**  
-   Command: `lynx 127.0.0.1/test.html`.  
-   If the file does not load, ensure `httpd` is running, the file is in the correct location, and permissions are set properly.
-
-4. **Optional:** Open the file from a Windows host by navigating to `http://[VM_IP]/test.html`.
+   #### **Respuesta:**
+   Ejecutando el comando se puede ver la columna `PPID`, que muestra el ID del proceso padre del servicio Apache.
 
 ---
 
-## Exercise 7.5 Creating and Viewing PHP Files
+## **Ejercicio 7.3: Creación de archivos HTML**
 
-1. **What does `phpinfo();` do?**  
-   It displays information about the PHP environment, including configuration and loaded modules.
+1. **¿Qué tiene de especial `index.htm` e `index.html`?**
 
-2. **Viewing `nse.php` using `lynx`:**  
-   Command: `lynx 127.0.0.1/nse.php`.  
-   If the source code appears instead, ensure PHP is enabled in `httpd.conf` and restart `httpd`.
+   #### **Respuesta:**
+   Son los archivos predeterminados que Apache busca para servir como página de inicio en un directorio.
 
----
+2. **Verifica los permisos y propiedad del archivo `index.html`.**
 
-## Exercise 7.6 Exploring and Adding an Entry to the Hosts File
+![Ejercicio 3, apartado 2](./capturas/lab07-3-1.png)
 
-1. **Adding an entry to `/etc/hosts`:**  
-   - Add: `127.0.0.1 www.example.com`  
-   - Resulting file:  
-     ```
-     # For loopbacking 127.0.0.1 localhost
-     # This next entry is technically wrong, but good enough to get TCP/IP apps
-     # to quit complaining that they can’t verify the hostname on a loopback-only
-     # Linux box
-     127.0.0.1 darkstar.example.net darkstar
-     127.0.0.1 www.example.com
-     # End of hosts.
-     ```
+   #### **Respuesta:**
+   Se puede usar el comando `ls -l /var/www/html/index.html` para ver los permisos y la propiedad del archivo.
 
-2. **Testing the hosts file:**  
-   Command: `lynx www.example.com`. Verify it resolves correctly.
+3. **Creación del archivo `test.html` y predicción de su visualización.**
+
+![Ejercicio 3, apartado 3](./capturas/lab07-3-2.png)
+
+   #### **Respuesta:**
+   El archivo `test.html` contendrá un título y un párrafo. Al abrirlo en un navegador, se verá una página con un encabezado y un mensaje de "Under construction!".
 
 ---
 
-## Exercise 7.7 Optional Exercises
+## **Ejercicio 7.4: Visualización de archivos HTML en la terminal**
 
-1. **`index.php` vs. `index.html`:**  
-   By default, `index.html` is loaded first. To change this, modify the `DirectoryIndex` setting in `httpd.conf` to prioritize `index.php`.
+1. **Diferencia entre CLI y GUI.**
 
-2. **Password-protecting `DocumentRoot`:**  
-   a) Create a password file: `htpasswd -c /var/www/.htpasswd user`  
-   b) Edit `httpd.conf` to include:  
-      ```
-      AuthType Basic
-      AuthName "Authorization required"
-      AuthUserFile /var/www/.htpasswd
-      Require valid-user
-      ```  
-   c) Restart `httpd`. Use `lynx 127.0.0.1` to test the authentication prompt.
+   #### **Respuesta:**
+   - CLI (Command Line Interface): Interfaz basada en texto donde se ingresan comandos.
+   - GUI (Graphical User Interface): Interfaz gráfica con ventanas y botones.
+
+2. **¿Qué tiene de especial la dirección IP `127.0.0.1`?**
+
+   #### **Respuesta:**
+   Es la dirección de loopback, utilizada para acceder al propio sistema local.
+
+3. **Ver archivo en `lynx` y capturar pantalla.**
+
+![Ejercicio 4, apartado 3](./capturas/lab07-4-1.png)
+
+   #### **Respuesta:**
+   Ejecutar `lynx 127.0.0.1/test.html` y tomar captura de la pantalla con la página cargada.
+
+ 4. **Ver el archivo en un navegador externo.**
+
+
+
+   #### **Respuesta:**
+   
+   ![Ejercicio 4, apartado 4](./capturas/lab07-4-2.png)
 
 ---
+
+## **Ejercicio 7.5: Creación y visualización de archivos PHP**
+
+1. **¿Qué hace `phpinfo();`?**
+
+![Ejercicio 5, apartado 1](./capturas/lab07-5-1.png)
+
+   #### **Respuesta:**
+   Muestra información detallada sobre la configuración de PHP en el servidor.
+
+2. **Cargar `nse.php` en `lynx` y capturar pantalla.**
+
+
+
+   #### **Respuesta:**
+   
+   ![Ejercicio 5, apartado 2](./capturas/lab07-5-2.png)
+
+---
+
+## **Ejercicio 7.6: Archivo `hosts`**
+
+1. **Modificar `/etc/hosts` para mapear `ServerName`.**
+
+
+   #### **Respuesta:**
+   
+![Ejercicio 6, apartado 1](./capturas/lab07-6-1.png)
+
+![Ejercicio 6, apartado 2](./capturas/lab07-6-2.png)
+
+   Agregar `127.0.0.1 www.example.com` al archivo `/etc/hosts`, luego ejecutar `lynx www.example.com`.
+
 
